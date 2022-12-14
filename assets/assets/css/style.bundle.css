@@ -42,7 +42,15 @@
 *::after {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
+  label {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+}
 
+input,
+label {
+    margin: .4rem 0;
+}
 html {
   font-family: sans-serif;
   line-height: 1.15;
