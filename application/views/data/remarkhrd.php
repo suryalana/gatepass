@@ -1,5 +1,5 @@
 <div class="container">
-    <h2>Gatepass Report </h2>
+    <h2>Gatepass Report HRD</h2>
     <div class="dropdown dropdown-inline mr-2">
         <button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="svg-icon svg-icon-md">
@@ -21,33 +21,9 @@
                 <li class="navi-item">
                     <a href="#" class="navi-link">
                         <span class="navi-icon">
-                            <i class="la la-print"></i>
-                        </span>
-                        <span class="navi-text">Print</span>
-                    </a>
-                </li>
-                <li class="navi-item">
-                    <a href="#" class="navi-link">
-                        <span class="navi-icon">
-                            <i class="la la-copy"></i>
-                        </span>
-                        <span class="navi-text">Copy</span>
-                    </a>
-                </li>
-                <li class="navi-item">
-                    <a href="#" class="navi-link">
-                        <span class="navi-icon">
                             <i class="la la-file-excel-o"></i>
                         </span>
                         <span class="navi-text">Excel</span>
-                    </a>
-                </li>
-                <li class="navi-item">
-                    <a href="#" class="navi-link">
-                        <span class="navi-icon">
-                            <i class="la la-file-text-o"></i>
-                        </span>
-                        <span class="navi-text">CSV</span>
                     </a>
                 </li>
                 <li class="navi-item">
@@ -67,6 +43,8 @@
     <hr>
 
     <body>
+
+
         <div class="container">
             <div class="card card-custom card-sticky" id="kt_page_sticky_card">
                 <div class="card-body">
@@ -81,6 +59,7 @@
                                 <th>Name</th>
                                 <th>Gatepass Remark</th>
                                 <th>Action</th>
+                                <th>Approve</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -94,14 +73,15 @@
                                     <td><?php echo $value->nik; ?></td>
                                     <td><?php echo $value->name; ?></td>
                                     <td><?php echo $value->gpremark; ?></td>
-                                    <td width="8%">
+                                    <td width="14%">
                                         <span class="btn btn-primary" onclick="editEm('<?php echo $value->id; ?>')" data-toggle="modal" data-target="#myModal_edit">Edit</span>
                                         <span onclick="delEm('<?php echo $value->id; ?>')" class="btn btn-danger">Delete</span>
-                                        <a href="<?php echo prefix_url; ?>gatepass/delEmployee/<?php echo $value->id; ?>" class="btn btn-danger">X</a>
+                                        <!-- <a href="<?php echo prefix_url; ?>gatepass/delEmployee/<?php echo $value->id; ?>" class="btn btn-danger">X</a> -->
                                     </td>
-
-
-
+                                    <td width="10%">
+                                        <span onclick="appr('<?php echo $value->id; ?>')" class="btn btn-success">V</span>
+                                        <span onclick="appr('<?php echo $value->id; ?>')" class="btn btn-danger">X</span>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
 
@@ -151,6 +131,7 @@
                 });
             }
         </script>
+
     </body>
 </div>
 

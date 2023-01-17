@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
@@ -25,8 +25,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $config['base_url'] = '';
 $config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
-$config['base_url'] .= "://".$_SERVER['HTTP_HOST'];
-$config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+$config['base_url'] .= "://" . $_SERVER['HTTP_HOST'];
+$config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
+
+$config = array(
+    'protocol' => 'smtp', // 'mail', 'sendmail', or 'smtp'
+    'smtp_host' => 'smtp.example.com',
+    'smtp_port' => 465,
+    'smtp_user' => 'no-reply@example.com',
+    'smtp_pass' => '12345!',
+    'smtp_crypto' => 'ssl', //can be 'ssl' or 'tls' for example
+    'mailtype' => 'text', //plaintext 'text' mails or 'html'
+    'smtp_timeout' => '4', //in seconds
+    'charset' => 'iso-8859-1',
+    'wordwrap' => TRUE
+);
+
+$config['base_url'] = 'http://localhost/Hola-Project-example-master';
 
 
 /*
@@ -56,7 +71,7 @@ $config['index_page'] = '';
 |
 | WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
 */
-$config['uri_protocol']	= 'REQUEST_URI';
+$config['uri_protocol']    = 'REQUEST_URI';
 
 /*
 |--------------------------------------------------------------------------
@@ -80,7 +95,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+$config['language']    = 'english';
 
 /*
 |--------------------------------------------------------------------------
@@ -141,7 +156,8 @@ $config['subclass_prefix'] = 'MY_';
 |	autoloading (application/config/autoload.php)
 */
 // $config['composer_autoload'] = 'vendor/autoload.php';
-$config['composer_autoload'] = false;
+// $config['composer_autoload'] = false;
+$config['composer_autoload'] = FCPATH . 'vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -391,14 +407,14 @@ $config['encryption_key'] = 'sfnskflaasnssdfdsfsfshfjshfkj';
 // $config['sess_regenerate_destroy'] = FALSE;
 
 $config['sess_driver'] = 'files';
-$config['sess_cookie_name']		= 'EsSign_session';
-$config['sess_expiration']		= 0;
+$config['sess_cookie_name']        = 'EsSign_session';
+$config['sess_expiration']        = 0;
 $config['sess_save_path'] = sys_get_temp_dir();
-$config['sess_expire_on_close']	= FALSE;
-$config['sess_encrypt_cookie']	= FALSE;
-$config['sess_match_ip']		= FALSE;
-$config['sess_match_useragent']	= FALSE;
-$config['sess_time_to_update']	= 0;
+$config['sess_expire_on_close']    = FALSE;
+$config['sess_encrypt_cookie']    = FALSE;
+$config['sess_match_ip']        = FALSE;
+$config['sess_match_useragent']    = FALSE;
+$config['sess_time_to_update']    = 0;
 
 /*
 |--------------------------------------------------------------------------
@@ -415,11 +431,11 @@ $config['sess_time_to_update']	= 0;
 |       'cookie_httponly') will also affect sessions.
 |
 */
-$config['cookie_prefix']	= '';
-$config['cookie_domain']	= '';
-$config['cookie_path']		= '/';
-$config['cookie_secure']	= FALSE;
-$config['cookie_httponly'] 	= FALSE;
+$config['cookie_prefix']    = '';
+$config['cookie_domain']    = '';
+$config['cookie_path']        = '/';
+$config['cookie_secure']    = FALSE;
+$config['cookie_httponly']     = FALSE;
 
 /*
 |--------------------------------------------------------------------------

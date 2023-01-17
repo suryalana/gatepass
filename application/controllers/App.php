@@ -28,6 +28,7 @@ class App extends CI_Controller
 		}
 	}
 
+
 	function checkLogin()
 	{
 		switch ($this->session->userdata('ex_level')) {
@@ -56,11 +57,13 @@ class App extends CI_Controller
 		$name = $this->input->post('name', TRUE);
 		$dept = $this->input->post('dept', TRUE);
 		$jab = $this->input->post('jab', TRUE);
+		$email = $this->input->post('email', TRUE);
 		$data = array(
 			'nik' => $nik,
 			'name' => $name,
 			'dept' => $dept,
 			'jab' => $jab,
+			'email' => $email,
 		);
 
 		$this->db->insert('tb_employee', $data);
@@ -74,11 +77,13 @@ class App extends CI_Controller
 		$name = $this->input->post('name', TRUE);
 		$dept = $this->input->post('dept', TRUE);
 		$jab = $this->input->post('jab', TRUE);
+		$email = $this->input->post('email', TRUE);
 		$data = array(
 			'nik' => $nik,
 			'name' => $name,
 			'dept' => $dept,
 			'jab' => $jab,
+			'email' => $email,
 		);
 
 		$this->db->where('id', $id);
@@ -121,6 +126,11 @@ class App extends CI_Controller
 				<div class="form-group">
 					<label for="email">Position:</label>
 					<input type="text" class="form-control" name="jab" value="<?php echo $value->jab; ?>">
+				</div>
+
+				<div class="form-group">
+					<label for="email">Email:</label>
+					<input type="text" class="form-control" name="email" value="<?php echo $value->email; ?>">
 				</div>
 
 				<button type="submit" class="btn btn-default">Submit</button>

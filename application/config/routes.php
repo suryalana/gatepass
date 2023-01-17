@@ -61,3 +61,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['item'] = "item/index";
 $route['get_items'] = "item/get_items";
+
+//email
+$route['send-email'] = 'email';
+$route['email'] = 'email/send';

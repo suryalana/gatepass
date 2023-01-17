@@ -41,6 +41,7 @@
   <!-- Hotjar Tracking Code for keenthemes.com -->
 </head>
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
 <body id="kt_body" style="background-image: url(assets/assetstamplate/assets/media/bg/bg-9.jpg)" class="quick-panel-right demo-panel-right offcanvas-right header-fixed subheader-enabled page-loading">
   <div class="d-flex flex-column flex-root">
@@ -70,9 +71,10 @@
                   </li>
 
                   <li><a href="<?php echo prefix_url; ?>app">GATEPASS EMPLOYEE</a></li>
-                  <li><a href="<?php echo prefix_url; ?>remark">GATEPASS APPROVE MANAGER</a></li>
+                  <!-- <li><a href="<?php echo prefix_url; ?>remark">GATEPASS APPROVE MANAGER</a></li> -->
                   <li><a href="<?php echo prefix_url; ?>remarkhrd">GATEPASS REPORT HR</a></li>
                 </ul>
+                <a href="<?php echo prefix_url; ?>employee" class=" btn btn-info" role="button">Data Employee</a>
                 <a href="<?php echo prefix_url; ?>login/logout" class="btn btn-danger">SIGN OUT</a>
               </div>
             </div>

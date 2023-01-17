@@ -1,6 +1,14 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+require 'includes/PHPMailer.php';
+require 'includes/SMTP.php';
+require 'includes/Exception.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 class Gatepass extends CI_Controller
 {
 
@@ -9,16 +17,32 @@ class Gatepass extends CI_Controller
         date_default_timezone_set('Asia/Jakarta');
         parent::__construct();
         $this->load->model('Mgatepass');
+        // $this->load->library('PHPMailer');
     }
 
     function index()
     {
+        // $data['input_gatepass']=$this->Mgatepass->get_employee('input_gatepass') ->result();
+
+
         $username = $this->session->userdata('ex_nik');
         $data['nik_session'] = $username;
         $level = $this->session->userdata('level_session');
         $data['level_session'] = $level;
         if (!empty($username)) {
-            $data['list'] = $this->Mgatepass->get_employee();
+            $check = $this->input->post('check');
+			if($check==1){
+                $check_date = 1;
+                $start_date = $this->input->post('start_date');
+                $end_date = $this->input->post('end_date');
+            }else{
+                $check_date = 0;
+                $start_date = date('Y-m-01');
+                $end_date = date('Y-m-t');
+            }
+            $data['start_date'] = $start_date;
+            $data['end_date'] = $end_date;
+            $data['list'] = $this->Mgatepass->get_employee($start_date,$end_date,$check_date);
             $data['list_remark'] = $this->Mgatepass->get_remark();
             $this->load->view('data/index_header_template', $data);
             // $this->load->view('data/dashboard', $data);
@@ -47,6 +71,16 @@ class Gatepass extends CI_Controller
         //     // button disable
         // }
     }
+    
+    function xlsReportExpanse($start_date,$end_date){
+		
+        $userID = $this->input->post('id', TRUE);
+		$data = array( 'title' => 'Gatepass'.$userID );
+		$data['list'] = $this->Mgatepass->get_report_expanse($start_date,$end_date); // model  
+		$data['start_date'] = $start_date; // model  
+		$data['end_date'] = $end_date; // model  
+		$this->load->view('data/xls_report_temp',$data); // lokasi view 
+	}
 
     function addEmpGatepass()
     {
@@ -104,6 +138,60 @@ class Gatepass extends CI_Controller
     {
         $this->db->where('id', $id);
         $this->db->delete('input_gatepass');
+        redirect('gatepass');
+    }
+
+    function approve()
+    {
+        $userID = $this->input->post('id', TRUE);
+        
+        // GEt user berdasarkan ID 
+        $dataUser = $this->Mgatepass->getEmployeeID($userID);
+
+        // die(var_dump($dataUser));
+
+        $fromEmail = "alipsayyidah102@gmail.com";
+        $isiEmail = "Halo ini adalah isi dari email yang berjudu \"Approve GatePass NIK\"http://localhost/Hola-Project-example-master/gatepass";
+        $mail = new PHPMailer();
+        
+        $mail->IsHTML(true);    // set email format to HTML
+        $mail->IsSMTP();   // we are going to use SMTP
+        $mail->SMTPAuth   = true; // enabled SMTP authentication
+        $mail->SMTPSecure = "ssl";  // prefix for secure protocol to connect to the server
+        
+        $mail->Host       = "smtp.gmail.com";      // setting GMail as our SMTP server
+        $mail->Port       = 465;  // SMTP port to connect to GMail
+        $mail->Username   = "alipsayyidah102@gmail.com";  // alamat email kamu
+        $mail->Password   = "mvevwzpfrxhfbxrx";            // password GMail
+        $mail->SetFrom('alipsayyidah102@gmail.com', 'noreply');  //Siapa yg mengirim email
+        $mail->Subject    = "Approve GatePass NIK : ".$dataUser['nik'];
+        $mail->Body       = $isiEmail;
+        //$toEmail = $dataUser['email']; // siapa yg menerima email ini
+        $toEmail = "alipsurya9@gmail.com"; // siapa yg menerima email ini
+        $mail->AddAddress($toEmail);
+
+        //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+
+        if (!$mail->Send()) {
+            $msgException = "Eror: " . $mail->ErrorInfo;
+        } else {
+            $msgException = "Email berhasil dikirim";
+            // $this->db->where('id', $userID);
+            // $this->db->update('input_gatepass');
+        }
+        echo $msgException;
+        //echo !extension_loaded('openssl')? $msgException ."//"."Not Available":$msgException ."//"."Available";;
+        
+    }
+
+    function reject($userID)
+    {
+        // $this->db->where('id', $id);
+        // $this->db->delete('input_gatepass');
+        $dataUser = $this->Mgatepass->getEmployeeID($userID);
+
+        $this->db->where('id', $userID);
+        $this->db->update('input_gatepass', $data);
         redirect('gatepass');
     }
 
