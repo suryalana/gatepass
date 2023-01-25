@@ -28,6 +28,16 @@ class App extends CI_Controller
 		}
 	}
 
+	function xlsReportExpanse($start_date,$end_date){
+		
+        $userID = $this->input->post('id', TRUE);
+		$data = array( 'title' => 'Gatepass'.$userID );
+		$data['list'] = $this->Mgatepass->get_report_expanse($start_date,$end_date); // model  
+		$data['start_date'] = $start_date; // model  
+		$data['end_date'] = $end_date; // model  
+		$this->load->view('data/xls_report_temp',$data); // lokasi view 
+	}
+
 
 	function checkLogin()
 	{

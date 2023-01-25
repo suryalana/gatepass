@@ -164,6 +164,50 @@ class Gatepass extends CI_Controller
         $mail->Username   = "alipsayyidah102@gmail.com";  // alamat email kamu
         $mail->Password   = "mvevwzpfrxhfbxrx";            // password GMail
         $mail->SetFrom('alipsayyidah102@gmail.com', 'noreply');  //Siapa yg mengirim email
+        $mail->Subject    = "Approve GatePass NIK : ".@$dataUser['nik'];
+        $mail->Body       = $isiEmail;
+        //$toEmail = $dataUser['email']; // siapa yg menerima email ini
+        $toEmail = "alipsurya9@gmail.com"; // siapa yg menerima email ini
+        $mail->AddAddress($toEmail);
+
+        //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+
+        if (!$mail->Send()) {
+            $msgException = "Eror: " . $mail->ErrorInfo;
+        } else {
+            $msgException = "Email berhasil dikirim";
+            $this->Mgatepass->updateStatusEmployee($userID, 1);
+        }
+        echo $msgException;
+        //echo !extension_loaded('openssl')? $msgException ."//"."Not Available":$msgException ."//"."Available";;
+        
+    }
+
+    function reject()
+    {
+        $userID = $this->input->post('id', TRUE);
+
+        //die(var_dump($userID));
+        
+        // GEt user berdasarkan ID 
+        $dataUser = $this->Mgatepass->getEmployeeID($userID);
+
+        //die(var_dump($dataUser));
+
+        $fromEmail = "alipsayyidah102@gmail.com";
+        $isiEmail = "Halo permintaan anda ditolak oleh manager\"Approve GatePass NIK\"http://localhost/Hola-Project-example-master/gatepass";
+        $mail = new PHPMailer();
+        
+        $mail->IsHTML(true);    // set email format to HTML
+        $mail->IsSMTP();   // we are going to use SMTP
+        $mail->SMTPAuth   = true; // enabled SMTP authentication
+        $mail->SMTPSecure = "ssl";  // prefix for secure protocol to connect to the server
+        
+        $mail->Host       = "smtp.gmail.com";      // setting GMail as our SMTP server
+        $mail->Port       = 465;  // SMTP port to connect to GMail
+        $mail->Username   = "alipsayyidah102@gmail.com";  // alamat email kamu
+        $mail->Password   = "mvevwzpfrxhfbxrx";            // password GMail
+        $mail->SetFrom('alipsayyidah102@gmail.com', 'noreply');  //Siapa yg mengirim email
         $mail->Subject    = "Approve GatePass NIK : ".$dataUser['nik'];
         $mail->Body       = $isiEmail;
         //$toEmail = $dataUser['email']; // siapa yg menerima email ini
@@ -176,23 +220,12 @@ class Gatepass extends CI_Controller
             $msgException = "Eror: " . $mail->ErrorInfo;
         } else {
             $msgException = "Email berhasil dikirim";
-            // $this->db->where('id', $userID);
-            // $this->db->update('input_gatepass');
+            $this->Mgatepass->updateStatusEmployee($userID, 2);
         }
         echo $msgException;
-        //echo !extension_loaded('openssl')? $msgException ."//"."Not Available":$msgException ."//"."Available";;
+
         
-    }
-
-    function reject($userID)
-    {
-        // $this->db->where('id', $id);
-        // $this->db->delete('input_gatepass');
-        $dataUser = $this->Mgatepass->getEmployeeID($userID);
-
-        $this->db->where('id', $userID);
-        $this->db->update('input_gatepass', $data);
-        redirect('gatepass');
+        //redirect('gatepass');
     }
 
     function editEmView()

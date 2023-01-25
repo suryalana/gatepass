@@ -46,7 +46,7 @@
                 </span>Add Form</button>
 
                 <?php if ($this->session->userdata('ex_level') == '1' || $this->session->userdata('ex_level') == '2') : ?>
-                <button class="btn btn-primary " data-toggle="modal" data-target="#filter">
+                <button class="btn btn-primary " data-toggle="modal" data-target="#filterx">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
@@ -103,7 +103,15 @@
                                         <td><?php echo $value->department; ?></td>
                                         <td><?php echo $value->reason; ?></td>
                                         <td><?php echo $value->gpremark; ?></td>
-                                        <td><?php echo $value->status; ?></td>
+
+                                        <td>
+                                            <?php if($value->status==0): ?><?php echo "PENDING"; ?>
+                                            <?php elseif($value->status==1): ?><?php echo "APPROVED"; ?>
+                                            <?php else: ?><?php echo "REJECTED"; ?>
+                                                
+                                        <?php endif; ?>
+                                        
+                                        </td>
                                         <?php if ($this->session->userdata('ex_level') == '1' || $this->session->userdata('ex_level') == '2') : ?>
                                             <td width="16%">
                                                 <span class="btn btn-primary" onclick="editEm('<?php echo $value->id; ?>')" data-toggle="modal" data-target="#myModal_edit">Edit</span>
@@ -116,9 +124,9 @@
                                                 <span onclick="appr('<?php echo $value->id; ?>')" class="btn btn-success">V</span>
                                                 <span onclick="reject('<?php echo $value->id; ?>')" class="btn btn-danger">X</span>
                                                 <?php elseif($value->status==1): ?>
-                                                    <span onclick="appr('<?php echo $value->id; ?>')" class="btn btn-success">Approve</span>
+                                                    <span onclick="appr('<?php echo $value->id; ?>')" class="btn btn-success" disabled>Approve</span>
                                                     <?php else: ?>
-                                                        <span onclick="appr('<?php echo $value->id; ?>')" class="btn btn-success">Rejected</span>
+                                                        <span onclick="reject('<?php echo $value->id; ?>')" class="btn btn-danger" disabled>Rejected</span>
                                                     <?php endif; ?>
                                             </td>
                                             <?php endif; ?>
@@ -170,6 +178,7 @@
                         dataType: 'html',
                         success: function(msgData) {
                             console.log(msgData);
+                            window.location.reload();
                             //$("#appr").html(data);
                         }
                     });
@@ -185,6 +194,7 @@
                         dataType: 'html',
                         success: function(msgDataReject) {
                             console.log(msgDataReject);
+                            window.location.reload();
                             // $("#reject").html(data);
                         }
                     });
@@ -294,24 +304,24 @@
         </div>
     </div>
 
-    <div id="filter" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3 class="modal-title">Filter Date </h3>
-            </div>
-            <div class="modal-body">
-                <form action="<?php echo prefix_url; ?>gatepass" method="POST">
-                    <input type="hidden" name="check" value='1' >
-                    <input type="date" class="btn btn-outline-success" name="start_date" value='<?php echo $start_date; ?>' >
-                    <input type="date" class="btn btn-outline-success" name="end_date" value='<?php echo $end_date; ?>' >
-                    <button type='submit' class="btn btn-primary">Filter</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <div id="filterx" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Filter Date </h3>
+                </div>
+                <div class="modal-body">
+                    <form action="<?php echo prefix_url; ?>gatepass" method="POST">
+                        <input type="hidden" name="check" value='1' >
+                        <input type="date" class="btn btn-outline-success" name="start_date" value='<?php echo $start_date; ?>' >
+                        <input type="date" class="btn btn-outline-success" name="end_date" value='<?php echo $end_date; ?>' >
+                        <button type='submit' class="btn btn-primary">Filter</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>

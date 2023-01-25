@@ -84,11 +84,11 @@
 
 
 </body>
-<div>
 
+<div>
     <div class="footer bg-white py-4 d-flex flex-lg-column" id="kt_footer">
         <!--begin::Container-->
-        <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
+        <div class="footer d-flex flex-column flex-md-row align-items-center justify-content-between">
             <!--begin::Copyright-->
             <div class="text-dark order-3 order-md-1">
                 <a href="https://www.citratubindo.com/" target="_blank" class="text-dark-75 text-hover-primary">PT Citra Tubindo Tbk</a>

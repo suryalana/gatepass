@@ -65,6 +65,25 @@ class Mgatepass extends CI_Model
         return $query->result();
     }
 
+    public function updateStatusEmployee($id = null, $type = null)
+    {
+        switch ($type) {
+            case 1: //Approve
+                    $sql = "UPDATE input_gatepass SET status = 1 WHERE id='$id'";
+                break;
+
+            case 2: //Reject
+                    $sql = "UPDATE input_gatepass SET status = 2 WHERE id='$id'";
+                break;
+            
+            default:
+                die("Error Call your IT Technician.");
+                break;
+        }
+
+        return $this->db->query($sql);     
+    }
+
     function get_report_expanse($start_date,$end_date){
 
         $nikuser = $this->session->userdata('ex_nik');
