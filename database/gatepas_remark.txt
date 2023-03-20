@@ -1,0 +1,14 @@
+-- Table: public.gatepass_remark
+
+-- DROP TABLE IF EXISTS public.gatepass_remark;
+
+CREATE TABLE IF NOT EXISTS public.gatepass_remark
+(
+    id integer NOT NULL DEFAULT nextval('gatepass_remark_id_seq'::regclass),
+    remark text COLLATE pg_catalog."default"
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.gatepass_remark
+    OWNER to postgres;

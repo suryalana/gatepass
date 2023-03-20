@@ -1,0 +1,22 @@
+-- Table: public.input_gatepass
+
+-- DROP TABLE IF EXISTS public.input_gatepass;
+
+CREATE TABLE IF NOT EXISTS public.input_gatepass
+(
+    id integer NOT NULL DEFAULT nextval('input_gatepass_id_seq'::regclass),
+    date date,
+    timein time without time zone,
+    timeout time without time zone,
+    nik text COLLATE pg_catalog."default",
+    name text COLLATE pg_catalog."default",
+    department text COLLATE pg_catalog."default",
+    reason text COLLATE pg_catalog."default",
+    gpremark text COLLATE pg_catalog."default",
+    status integer DEFAULT 0
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.input_gatepass
+    OWNER to postgres;

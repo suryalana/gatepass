@@ -1,0 +1,18 @@
+-- Table: public.tb_employee
+
+-- DROP TABLE IF EXISTS public.tb_employee;
+
+CREATE TABLE IF NOT EXISTS public.tb_employee
+(
+    id integer NOT NULL DEFAULT nextval('tes_employee_id_seq'::regclass),
+    nik text COLLATE pg_catalog."default",
+    name text COLLATE pg_catalog."default",
+    dept text COLLATE pg_catalog."default",
+    jab text COLLATE pg_catalog."default",
+    email text COLLATE pg_catalog."default"
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.tb_employee
+    OWNER to postgres;

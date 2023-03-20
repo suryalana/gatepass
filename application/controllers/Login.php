@@ -68,6 +68,7 @@ class Login extends CI_Controller
 
 	function checkLogin()
 	{
+		
 		$username = $this->input->post('username', TRUE);
 		$check_user = $this->Madminuser->check_user();
 		if ($check_user == 1) {
@@ -106,6 +107,8 @@ class Login extends CI_Controller
 			echo 'Username 0r password Error';
 		}
 	}
+
+	
 
 	function logout()
 	{

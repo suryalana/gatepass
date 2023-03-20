@@ -1,0 +1,16 @@
+-- Table: public.tb_admin
+
+-- DROP TABLE IF EXISTS public.tb_admin;
+
+CREATE TABLE IF NOT EXISTS public.tb_admin
+(
+    id integer NOT NULL DEFAULT nextval('tb_admin_id_seq'::regclass),
+    nik text COLLATE pg_catalog."default",
+    name text COLLATE pg_catalog."default",
+    role_level text COLLATE pg_catalog."default"
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.tb_admin
+    OWNER to postgres;

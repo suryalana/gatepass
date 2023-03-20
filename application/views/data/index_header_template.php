@@ -78,31 +78,51 @@
                 <a href="<?php echo prefix_url; ?>login/logout" class="btn btn-danger">SIGN OUT</a>
               </div>
             </div>
+            <div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <!-- <div id="content"> -->
+
+        <!-- Topbar -->
+        <!-- <nav class="navbar navbar-expand navbar-light bg-custom topbar mb-4 static-top shadow"> -->
+        <!-- <nav class="navbar navbar-expand navbar-light bg-primary topbar mb-4 static-top shadow"> -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+            <!-- Sidebar Toggle (Topbar) -->
+            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+
+                    <div class="topbar-divider d-none d-sm-block"></div>
+
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline text-white small" ></span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small" ></span>
+                            <img class="img-profile rounded-circle">
+                        </a>
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="<?php echo prefix_url; ?>login/logout">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </li>
+                    <!-- END OF Nav Item - User Information -->
+          
+
+            </ul>
+
+        </nav>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-
-  <!-- <body>
-  <br>
-  <div class="container">
-    <a href="<?php echo prefix_url; ?>Dashboard" class="btn btn-primary">DASHBOARD</a>
-    <a href="<?php echo prefix_url; ?>app" class="btn btn-primary">DATA EMPLOYEE</a>
-    <a href="<?php echo prefix_url; ?>gatepass" class="btn btn-primary">GATEPASS FORM</a>
-    <a href="<?php echo prefix_url; ?>gatepass/remark" class="btn btn-primary">REMARK EDIT</a>
-    <a href="<?php echo prefix_url; ?>gatepass/remarkhrd" class="btn btn-primary">HRD GATEPASS REPORT</a>
-
-    <?php if ($level_session == '1') : ?>
-      <a href="<?php echo prefix_url; ?>gatepass" class="btn btn-primary">GATEPASS FORM</a>
-      <a href="<?php echo prefix_url; ?>gatepass/remark" class="btn btn-primary">REMARK EDIT</a>
-      <a href="<?php echo prefix_url; ?>gatepass/remarkhrd" class="btn btn-primary">HRD GATEPASS REPORT</a>
-    <?php endif; ?>
-
-    <?php if ($level_session == '2') : ?>
-      <a href="<?php echo prefix_url; ?>gatepass/remark" class="btn btn-primary">REMARK EDIT</a>
-    <?php endif; ?>
-    <a href="<?php echo prefix_url; ?>login/logout" class="btn btn-danger">SIGN OUT</a>
-  </div>
-</body> -->
